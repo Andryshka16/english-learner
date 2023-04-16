@@ -7,7 +7,7 @@ export function WordField(word: WordType) {
 	const [{ english, russian }, setWord] = useState(word)
 
 	const inputStyle =
-		'mx-4 bg-transparent w-26 text-xl text-white whitespace-nowrap line-clamp-1 text-ellipsis focus:outline-none'
+		'mx-4 bg-transparent w-26 text-2xl text-white whitespace-nowrap line-clamp-1 text-ellipsis focus:outline-none'
 
 	const initial = JSON.stringify(word) === JSON.stringify({ english, russian })
 
@@ -37,12 +37,12 @@ export function WordField(word: WordType) {
 			>
 				<BsCheckCircle
 					color='#00ff3c'
-					size={19}
+					size={21}
 					className={'transition duration-200 hover:scale-110 mr-1'}
 				/>
 				<AiOutlineCloseCircle
 					color='#ff2121'
-					size={21}
+					size={23}
 					className='transition duration-200 hover:scale-110'
 					onClick={() => setWord(word)}
 				/>

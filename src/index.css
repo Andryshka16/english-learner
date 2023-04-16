@@ -3,5 +3,14 @@
 @tailwind utilities;
 
 body {
-    background: #001b22;
+	background: #001b22;
+}
+
+.with-scroll::-webkit-scrollbar {
+	width: 7px;
+}
+
+.with-scroll::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background: #505050;
 }
