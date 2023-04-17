@@ -1,10 +1,10 @@
 import NavBar from 'components/Navbar'
-import AddWords from 'pages/add words/AddWords'
-import Words from 'pages/word practice/WordsPractice'
+import NewWords from 'pages/new words/NewWordsForm'
+import Words from 'pages/practice/WordsPractice'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useAppDispatch } from 'hooks/storeHooks'
-import { fetchWords } from 'redux/features/words'
+import { fetchWords } from 'redux/features/wordsSlice'
 
 function App() {
 	const dispatch = useAppDispatch()
@@ -17,7 +17,7 @@ function App() {
 				<NavBar />
 				<Routes>
 					<Route path='/' element={<Words />} />
-					<Route path='/addWords' element={<AddWords />} />
+					<Route path='/newWords' element={<NewWords />} />
 				</Routes>
 			</BrowserRouter>
 		</div>

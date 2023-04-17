@@ -10,8 +10,8 @@ export default function NavBar() {
 				<NavLink to='/' className='mx-3 text-xl'>
 					Practice
 				</NavLink>
-				<NavLink to='/addWords' className='mx-3 text-xl'>
-					Add words
+				<NavLink to='/newWords' className='mx-3 text-xl'>
+					New words
 				</NavLink>
 				<NavLink to='/test' className='mx-3 text-xl'>
 					Test

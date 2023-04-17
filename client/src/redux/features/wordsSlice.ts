@@ -19,10 +19,13 @@ const wordsSlice = createSlice({
 	reducers: {},
 	extraReducers: (build) =>
 		build
+			.addCase(fetchWords.pending, (state, action) => initialState)
 			.addCase(fetchWords.fulfilled, (state, action) => {
 				state.words = action.payload
+				state.loading = false
 			})
-			.addCase(fetchWords.rejected, () => {
+			.addCase(fetchWords.rejected, (state) => {
+				state.loading = false
 				console.log('something went wrong!')
 			}),
 })
