@@ -9,7 +9,7 @@ export function WordField(word: WordType) {
 	const inputStyle =
 		'mx-4 bg-transparent w-26 text-2xl text-white whitespace-nowrap line-clamp-1 text-ellipsis focus:outline-none'
 
-	const initial = JSON.stringify(word) === JSON.stringify({ english, russian })
+	const initial = word.english === english && word.russian === russian
 
 	return (
 		<form

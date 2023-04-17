@@ -1,23 +1,11 @@
-import { useState } from 'react'
 import { WordField } from './WordField'
-import wordsList from 'assets/words'
-
-const randomIndex = () => Math.floor(Math.random() * wordsList.length)
-export const getWords = () => {
-	const array: number[] = []
-	for (let i = 1; i <= 15; i++) {
-		let index = randomIndex()
-		while (array.find((i) => i === index)) index = randomIndex()
-		array.push(index)
-	}
-	return array.map((index) => wordsList[index])
-}
+import { useAppSelector } from 'hooks/storeHooks'
 
 export default function Words() {
-	const [words, setWords] = useState(getWords())
-
 	const buttonStyle =
 		'mt-2 bg-blue-600 rounded-md py-[3px] px-5 text-white text-xl font-medium hover:bg-blue-700 transition duration-200'
+
+	const { words } = useAppSelector((store) => store.words)
 
 	return (
 		<div className='relative w-fit m-auto mt-10 rounded-md py-5 px-8 bg-slate-600'>
@@ -29,7 +17,7 @@ export default function Words() {
 				<button className={buttonStyle} onClick={() => {}}>
 					Do test
 				</button>
-				<button className={buttonStyle} onClick={() => setWords(getWords())}>
+				<button className={buttonStyle} onClick={() => {}}>
 					Next
 				</button>
 			</div>
