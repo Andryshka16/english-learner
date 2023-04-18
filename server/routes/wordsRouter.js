@@ -13,4 +13,15 @@ wordsRouter.get('/:n', async (req, res) => {
 	}
 })
 
+wordsRouter.delete('/delete/:id', async (req, res) => {
+	const { id: _id } = req.params
+	try {
+		await Words.deleteOne({ _id })
+		const [newWord] = await Words.aggregate([{ $sample: { size: 1 } }])
+		res.send({ newWord, _id })
+	} catch (error) {
+		res.status(500).send('Error deleting this element')
+	}
+})
+
 export default wordsRouter

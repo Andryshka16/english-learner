@@ -1,17 +1,24 @@
+import axios, { isAxiosError } from 'axios'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { wordsInitialstate } from 'types/storeTypes'
 import { Word } from 'types/word'
+
+const api = import.meta.env.VITE_WORDS_API
 
 const initialState: wordsInitialstate = {
 	words: [],
 	loading: true,
 }
 
-export const fetchWords = createAsyncThunk<Word[], number>('words/fetchWords', async (n) => {
-	const response = await fetch(import.meta.env.VITE_SERVER + '/words/' + n)
-	const words = await response.json()
-	return words
-})
+export const fetchWords = createAsyncThunk<Word[], number>(
+	'words/fetchWords',
+	async (amount) => (await axios.get(`${api}/${amount}`)).data
+)
+
+export const deleteWord = createAsyncThunk<{ newWord: Word; _id: string }, string>(
+	'words/deleteWord',
+	async (_id) => (await axios.delete(`${api}/delete/${_id}`)).data
+)
 
 const wordsSlice = createSlice({
 	name: 'words',
@@ -19,7 +26,7 @@ const wordsSlice = createSlice({
 	reducers: {},
 	extraReducers: (build) =>
 		build
-			.addCase(fetchWords.pending, (state, action) => initialState)
+			.addCase(fetchWords.pending, () => initialState)
 			.addCase(fetchWords.fulfilled, (state, action) => {
 				state.words = action.payload
 				state.loading = false
@@ -27,6 +34,10 @@ const wordsSlice = createSlice({
 			.addCase(fetchWords.rejected, (state) => {
 				state.loading = false
 				console.log('something went wrong!')
+			})
+			.addCase(deleteWord.fulfilled, (state, action) => {
+				const { _id, newWord } = action.payload
+				state.words = state.words.map((word) => (word._id === _id ? newWord : word))
 			}),
 })
 
