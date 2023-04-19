@@ -1,4 +1,4 @@
-import { fetchWords } from 'redux/features/wordsSlice'
+import { fetchWords, fetchNewest } from 'redux/features/wordsSlice'
 import { WordInput } from './WordInput'
 import { useAppDispatch, useAppSelector } from 'hooks/storeHooks'
 import Loader from 'components/Loader'
@@ -21,9 +21,20 @@ export default function Words() {
 				<button className={buttonStyle} onClick={() => {}}>
 					Do test
 				</button>
-				<button className={buttonStyle} onClick={() => dispatch(fetchWords(15))}>
-					Next
-				</button>
+				<div className='flex'>
+					<button
+						className={`${buttonStyle} mr-2`}
+						onClick={() => dispatch(fetchWords(15))}
+					>
+						Random
+					</button>
+					<button
+						className={`${buttonStyle} ml-1`}
+						onClick={() => dispatch(fetchNewest(15))}
+					>
+						Newest
+					</button>
+				</div>
 			</div>
 		</div>
 	)

@@ -3,6 +3,16 @@ import Words from '../models/Words.js'
 
 const wordsRouter = Router()
 
+wordsRouter.get('/newest/:n', async (req, res) => {
+	const n = parseInt(req.params.n)
+	try {
+		const elements = await Words.find({}).sort({ _id: -1 }).limit(n)
+		res.send(elements)
+	} catch (error) {
+		res.status(500).send('Error fetching newest elements')
+	}
+})
+
 wordsRouter.get('/:n', async (req, res) => {
 	const n = parseInt(req.params.n)
 	try {

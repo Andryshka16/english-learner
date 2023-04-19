@@ -15,6 +15,11 @@ export const fetchWords = createAsyncThunk<Word[], number>(
 	async (amount) => (await axios.get(`${api}/${amount}`)).data
 )
 
+export const fetchNewest = createAsyncThunk<Word[], number>(
+	'words/fetchNewest',
+	async (amount) => (await axios.get(`${api}/newest/${amount}`)).data
+)
+
 export const deleteWord = createAsyncThunk<{ newWord: Word; _id: string }, string>(
 	'words/deleteWord',
 	async (_id) => (await axios.delete(`${api}/delete/${_id}`)).data
@@ -31,9 +36,9 @@ const wordsSlice = createSlice({
 				state.words = action.payload
 				state.loading = false
 			})
-			.addCase(fetchWords.rejected, (state) => {
+			.addCase(fetchNewest.fulfilled, (state, action) => {
+				state.words = action.payload
 				state.loading = false
-				console.log('something went wrong!')
 			})
 			.addCase(deleteWord.fulfilled, (state, action) => {
 				const { _id, newWord } = action.payload
