@@ -23,6 +23,16 @@ wordsRouter.get('/:n', async (req, res) => {
 	}
 })
 
+wordsRouter.put('/new', (req, res) => {
+	const words = req.body
+	try {
+		Words.insertMany(words)
+		res.send()
+	} catch (error) {
+		res.status(500).send('Error adding new words')
+	}
+})
+
 wordsRouter.delete('/delete/:id', async (req, res) => {
 	const { id: _id } = req.params
 	try {
