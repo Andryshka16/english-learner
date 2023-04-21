@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { useAppDispatch } from 'hooks/storeHooks'
 import { useState } from 'react'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
@@ -6,16 +7,20 @@ import { RiDeleteBinLine } from 'react-icons/ri'
 import { deleteWord } from 'redux/features/wordsSlice'
 import { Word } from 'types/word'
 
+const api = import.meta.env.VITE_WORDS_API
+
 export function WordInput(word: Word) {
 	const dispatch = useAppDispatch()
-	const [{ english, russian }, setWord] = useState(word)
+
 	const [visible, setVisible] = useState(false)
+	const [initialWord, setInitialWord] = useState(word)
+	const [{ english, russian }, setWord] = useState(word)
 
 	const inputStyle =
 		'mx-4 bg-transparent text-2xl text-white whitespace-nowrap line-clamp-1 text-ellipsis focus:outline-none'
 	const buttonContainerStyle = 'absolute right-3 w-12 flex items-center transition duration-200'
 	const buttonStyle = 'transition duration-200 hover:scale-110'
-	const hasChanged = word.english !== english || word.russian !== russian
+	const hasChanged = english !== initialWord.english || russian !== initialWord.russian
 
 	return (
 		<form
@@ -51,7 +56,16 @@ export function WordInput(word: Word) {
 					!hasChanged ? 'opacity-0 translate-x-5 pointer-events-none' : ''
 				}`}
 			>
-				<BsCheckCircle color='#00ff3c' size={21} className={buttonStyle} />
+				<BsCheckCircle
+					color='#00ff3c'
+					size={21}
+					className={buttonStyle}
+					onClick={() =>
+						axios
+							.post(`${api}/update/${word._id}`, { english, russian })
+							.then(() => setInitialWord((prev) => ({ ...prev, english, russian })))
+					}
+				/>
 				<AiOutlineCloseCircle
 					color='#ff2121'
 					size={23}

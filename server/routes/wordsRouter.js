@@ -27,9 +27,23 @@ wordsRouter.put('/new', (req, res) => {
 	const words = req.body
 	try {
 		Words.insertMany(words)
-		res.send()
+		res.send('OK')
 	} catch (error) {
 		res.status(500).send('Error adding new words')
+	}
+})
+
+wordsRouter.post('/update/:id', async (req, res) => {
+	const { id: _id } = req.params
+	const { english, russian } = req.body
+	try {
+		const word = await Words.findOne({ _id })
+		word.english = english
+		word.russian = russian
+		word.save()
+		res.send('OK')
+	} catch (error) {
+		res.status(500).send('Error updating this element')
 	}
 })
 
