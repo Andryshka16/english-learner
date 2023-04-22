@@ -4,9 +4,9 @@ export default function shuffle(array: Word[]) {
 	const arr = [...array]
 	for (let i = arr.length - 1; i > 0; i--) {
 		let j = Math.floor(Math.random() * (i + 1))
-		let temp = arr[i]
-		arr[i] = arr[j]
-		arr[j] = temp
+		let temp = arr[i].russian
+		arr[i].russian = arr[j].russian
+		arr[j].russian = temp
 	}
 	return arr
 }
