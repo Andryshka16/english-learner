@@ -1,33 +1,49 @@
 import { useAppSelector } from 'hooks/storeHooks'
 import { useState } from 'react'
-import ShuffledList from './ShuffledList'
+import { Word } from 'types/word'
+import WordField from './WordField'
+import DraggableWord from './DraggableWord'
+import Loader from 'components/Loader'
 
 export default function Test() {
-	const { shuffled } = useAppSelector((store) => store.words)
+	const { loading, shuffled } = useAppSelector((store) => store.words)
 
-	const [draggableWord, setDraggableWord] = useState<string | null>(null)
+	const [dragging, setDragging] = useState<string | null>(null)
 	const [usedWords, setUsedWords] = useState<string[]>([])
+	const [showResults, setShowResults] = useState(false)
+	const unUsedWords = shuffled.filter((word) => !usedWords.includes(word.russian))
+	// const unUsedWords: Word[] = []
 
-	return (
+	return loading ? (
+		<Loader />
+	) : (
 		<div>
-			<ShuffledList draggableWord={draggableWord} setUsedWords={setUsedWords} />
+			<div className='grid grid-cols-2 gap-4 w-1/2 min-w-fit m-auto my-5 text-justify'>
+				{shuffled.map((word) => (
+					<WordField
+						{...word}
+						showResults={showResults}
+						draggableWord={dragging}
+						setUsedWords={setUsedWords}
+					/>
+				))}
+			</div>
+
 			<hr className='w-3/4 m-auto my-3' />
+
 			<div className='w-2/3 m-auto text-justify'>
-				{shuffled
-					.filter(({ russian }) => !usedWords.includes(russian))
-					.map((word) => (
-						<div
-							key={`w${word.russian}`}
-							draggable
-							className={`inline-block text-xl text-white m-2 py-1.5 px-4 bg-slate-600 rounded-lg cursor-grab transition duration-200 hover:scale-105 select-none ${
-								draggableWord === word.russian ? 'opacity-50' : ''
-							}`}
-							onDragStart={() => setDraggableWord(word.russian)}
-							onDragEnd={() => setDraggableWord(null)}
-						>
-							{word.russian}
-						</div>
-					))}
+				{!!unUsedWords.length ? (
+					unUsedWords.map((word) => (
+						<DraggableWord {...word} dragging={dragging} setDragging={setDragging} />
+					))
+				) : (
+					<button
+						className='block m-auto bg-blue-500 text-white font-semibold py-2 px-7 rounded-md transition duration-200 hover:bg-blue-600'
+						onClick={() => setShowResults(true)}
+					>
+						Submit
+					</button>
+				)}
 			</div>
 		</div>
 	)

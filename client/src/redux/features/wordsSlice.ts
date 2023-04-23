@@ -39,6 +39,7 @@ const wordsSlice = createSlice({
 				state.shuffled = shuffle(state.words)
 				state.loading = false
 			})
+			.addCase(fetchNewest.pending, () => initialState)
 			.addCase(fetchNewest.fulfilled, (state, action) => {
 				state.words = action.payload
 				state.shuffled = shuffle(state.words)
