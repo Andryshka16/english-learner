@@ -2,13 +2,11 @@ import axios from 'axios'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { wordsInitialstate } from 'types/storeTypes'
 import { Word } from 'types/word'
-import shuffle from 'utils/shuffle'
 
 const api = import.meta.env.VITE_WORDS_API
 
 const initialState: wordsInitialstate = {
 	words: [],
-	shuffled: [],
 	loading: true,
 }
 
@@ -36,19 +34,16 @@ const wordsSlice = createSlice({
 			.addCase(fetchWords.pending, () => initialState)
 			.addCase(fetchWords.fulfilled, (state, action) => {
 				state.words = action.payload
-				state.shuffled = shuffle(state.words)
 				state.loading = false
 			})
 			.addCase(fetchNewest.pending, () => initialState)
 			.addCase(fetchNewest.fulfilled, (state, action) => {
 				state.words = action.payload
-				state.shuffled = shuffle(state.words)
 				state.loading = false
 			})
 			.addCase(deleteWord.fulfilled, (state, action) => {
 				const { _id, newWord } = action.payload
 				state.words = state.words.map((word) => (word._id === _id ? newWord : word))
-				state.shuffled = shuffle(state.words)
 			}),
 })
 
