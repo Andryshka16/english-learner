@@ -1,6 +1,4 @@
-import { Word } from 'types/word'
-
-export default function shuffle(array: Word[]) {
+export default function shuffle<T>(array: T[]) {
 	array = JSON.parse(JSON.stringify(array))
 	for (let i = array.length - 1; i > 0; i--) {
 		let j = Math.floor(Math.random() * (i + 1))
