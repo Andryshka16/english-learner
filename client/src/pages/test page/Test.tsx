@@ -5,14 +5,12 @@ import TestField from './TestField'
 import UnUsedWord from './UnUsedWord'
 import Loader from 'components/Loader'
 
-export interface unUsedWord {
-	word: string
-}
-
 export default function Test() {
 	const dispatch = useAppDispatch()
 	const { words, loading } = useAppSelector((store) => store.words)
 	const { testFields, unUsedWords } = useAppSelector((store) => store.test)
+
+	const showResults = () => dispatch(setResultsVisible())
 
 	useEffect(() => {
 		dispatch(resetTest(words))
@@ -35,18 +33,12 @@ export default function Test() {
 					<UnUsedWord word={word} />
 				))}
 
-				<div className='flex w-fit m-auto'>
+				<div className='flex items-center w-fit m-auto'>
 					<button
 						className='m-3 text-white font-semibold py-2 px-7 rounded-md transition duration-200 bg-blue-500 hover:bg-blue-600'
-						onClick={() => dispatch(setResultsVisible())}
+						onClick={showResults}
 					>
 						Submit
-					</button>
-					<button
-						className='m-3 text-white font-semibold py-2 px-7 rounded-md transition duration-200 bg-blue-500 hover:bg-blue-600'
-						onClick={() => dispatch(resetTest(words))}
-					>
-						Reset
 					</button>
 				</div>
 			</div>

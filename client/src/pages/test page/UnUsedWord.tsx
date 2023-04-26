@@ -1,8 +1,7 @@
 import { useAppDispatch, useAppSelector } from 'hooks/storeHooks'
 import { setDragging } from 'redux/features/testSlice'
-import { unUsedWord } from './Test'
 
-const UnUsedWord = ({ word }: unUsedWord) => {
+const UnUsedWord = ({ word }: { word: string }) => {
 	const dispatch = useAppDispatch()
 	const { dragging } = useAppSelector((store) => store.test)
 	return (

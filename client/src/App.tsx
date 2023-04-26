@@ -6,6 +6,7 @@ import { fetchWords } from 'redux/features/wordsSlice'
 import NewWords from 'pages/new words/NewWordsForm'
 import Words from 'pages/practice/WordsPractice'
 import Test from 'pages/test page/Test'
+import Footer from 'components/Footer'
 
 function App() {
 	const dispatch = useAppDispatch()
@@ -21,6 +22,7 @@ function App() {
 					<Route path='/newWords' element={<NewWords />} />
 					<Route path='/test' element={<Test />} />
 				</Routes>
+				<Footer />
 			</BrowserRouter>
 		</div>
 	)

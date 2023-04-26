@@ -35,6 +35,7 @@ const testSlice = createSlice({
 				word.insertion = state.dragging
 				state.unUsedWords = state.unUsedWords.filter((word) => word !== state.dragging)
 				state.dragging = null
+				state.showResults = false
 			}
 		},
 	},
