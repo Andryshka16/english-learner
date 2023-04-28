@@ -17,7 +17,7 @@ export default function WordInput(word: Word) {
 	const [{ english, russian }, setWord] = useState(word)
 
 	const inputStyle =
-		'w-96 mx-4 bg-transparent text-[25px] text-white line-clamp-1 text-ellipsis focus:outline-none'
+		'w-1/2 mx-4 bg-transparent text-[25px] text-white line-clamp-1 text-ellipsis focus:outline-none'
 	const buttonContainerStyle = 'absolute right-3 w-12 flex items-center transition duration-200'
 	const buttonStyle = 'transition duration-200 hover:scale-110'
 	const hasChanged = english !== initialWord.english || russian !== initialWord.russian

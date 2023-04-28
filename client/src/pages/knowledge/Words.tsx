@@ -12,7 +12,7 @@ export default function Words() {
 	const { words, loading } = useAppSelector((store) => store.words)
 
 	return (
-		<div className='relative m-auto rounded-md py-10 px-20 bg-slate-600'>
+		<div className='relative min-w-[1000px] m-auto rounded-md py-10 px-20 bg-slate-600'>
 			{loading && <Loader />}
 			{words.map((word) => (
 				<WordInput {...word} key={JSON.stringify(word)} />
