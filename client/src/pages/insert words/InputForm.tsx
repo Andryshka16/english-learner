@@ -62,7 +62,7 @@ export default function AddWords() {
 					ref={ref2}
 				></textarea>
 			</div>
-			<button className='block mx-auto mt-4 py-1 px-6 rounded-md text-lg text-white font-semibold bg-blue-500 transition duration-200 hover:scale-105'>
+			<button className='block mx-auto m-4 py-1 px-6 rounded-md text-lg text-white font-semibold bg-blue-500 transition duration-200 hover:scale-105'>
 				Submit
 			</button>
 		</form>
