@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 const api = import.meta.env.VITE_WORDS_API
 
 const textAreaStyle = (isValid: boolean) =>
-	`with-scroll bg-slate-800 w-[45%] h-[70vh] px-2 text-white text-2xl transition duration-300 outline-none border rounded-lg ${
+	`with-scroll bg-slate-800 w-[670px] h-[730px] mx-5 px-2 text-white text-2xl transition duration-300 outline-none border rounded-lg ${
 		!isValid ? 'border-red-500' : 'border-transparent focus:border-blue-500'
 	}`
 
@@ -32,7 +32,7 @@ export default function AddWords() {
 			}
 		}
 		if (words.length) {
-			await axios.put(`${api}/new`, words)
+			await axios.put(`${api}`, words)
 			if (ref1.current && ref2.current) {
 				ref1.current.value = ''
 				ref2.current.value = ''
@@ -49,7 +49,7 @@ export default function AddWords() {
 	}, [])
 
 	return (
-		<form onSubmit={handleSubmit} className='w-2/3 h-2/3 mx-auto my-10'>
+		<form onSubmit={handleSubmit} className='w-3/4 mx-auto mt-5'>
 			<div className='flex justify-around h-fit'>
 				<textarea
 					className={textAreaStyle(first) + ' resize-none'}
@@ -62,7 +62,7 @@ export default function AddWords() {
 					ref={ref2}
 				></textarea>
 			</div>
-			<button className='block mx-auto my-4 py-1 px-5 rounded text-white font-medium bg-blue-500 transition duration-200 hover:scale-105'>
+			<button className='block mx-auto mt-4 py-1 px-6 rounded-md text-lg text-white font-semibold bg-blue-500 transition duration-200 hover:scale-105'>
 				Submit
 			</button>
 		</form>

@@ -2,7 +2,6 @@ import express from 'express'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import cors from 'cors'
-import Words from './models/Words.js'
 import wordsRouter from './routes/wordsRouter.js'
 
 const PORT = process.env.PORT || '4000'
@@ -17,7 +16,6 @@ app.use('/', (_, res) => res.send('<h1>Server is live</h1>'))
 
 mongoose.connect(process.env.MONGO_DB).then(() => console.log('Connected to database'))
 
-Words.deleteMany()
 app.listen(PORT, (error) => {
 	if (error) {
 		return console.log(error)

@@ -1,16 +1,16 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { TestInitialState } from 'types/storeTypes'
+import { PracticeInitialState } from 'types/storeTypes'
 import { Word } from 'types/word'
 import shuffle from 'utils/shuffle'
 
-const initialState: TestInitialState = {
+const initialState: PracticeInitialState = {
 	testFields: [],
 	unUsedWords: [],
 	showResults: false,
 	dragging: null,
 }
 
-const testSlice = createSlice({
+const practiceSlice = createSlice({
 	name: 'test',
 	initialState,
 	reducers: {
@@ -32,6 +32,9 @@ const testSlice = createSlice({
 		updateOne: (state, action: PayloadAction<string>) => {
 			const word = state.testFields.find(({ english }) => english === action.payload)
 			if (word) {
+				if (word.insertion) {
+					state.unUsedWords.push(word.insertion)
+				}
 				word.insertion = state.dragging
 				state.unUsedWords = state.unUsedWords.filter((word) => word !== state.dragging)
 				state.dragging = null
@@ -41,5 +44,5 @@ const testSlice = createSlice({
 	},
 })
 
-export default testSlice.reducer
-export const { resetTest, setResultsVisible, setDragging, updateOne } = testSlice.actions
+export default practiceSlice.reducer
+export const { resetTest, setResultsVisible, setDragging, updateOne } = practiceSlice.actions

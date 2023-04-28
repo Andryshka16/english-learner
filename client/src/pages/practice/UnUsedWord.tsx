@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from 'hooks/storeHooks'
-import { setDragging } from 'redux/features/testSlice'
+import { setDragging } from 'redux/features/practiceSlice'
 
 const UnUsedWord = ({ word }: { word: string }) => {
 	const dispatch = useAppDispatch()
@@ -8,7 +8,7 @@ const UnUsedWord = ({ word }: { word: string }) => {
 		<div
 			key={`w${word}`}
 			draggable
-			className={`inline-block text-xl text-white m-2 py-1.5 px-4 bg-slate-600 rounded-lg cursor-grab transition duration-200 hover:scale-105 select-none ${
+			className={`inline-block text-xl text-white m-2 py-1.5 px-6 bg-slate-600 rounded-lg cursor-grab transition duration-200 hover:scale-105 select-none ${
 				dragging === word ? 'opacity-50' : ''
 			}`}
 			onDragStart={() => dispatch(setDragging(word))}

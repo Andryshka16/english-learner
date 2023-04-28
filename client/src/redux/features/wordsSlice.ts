@@ -22,7 +22,7 @@ export const fetchNewest = createAsyncThunk<Word[], number>(
 
 export const deleteWord = createAsyncThunk<{ newWord: Word; _id: string }, string>(
 	'words/deleteWord',
-	async (_id) => (await axios.delete(`${api}/delete/${_id}`)).data
+	async (_id) => (await axios.delete(`${api}/${_id}`)).data
 )
 
 const wordsSlice = createSlice({

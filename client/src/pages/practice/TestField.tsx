@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from 'hooks/storeHooks'
-import { updateOne } from 'redux/features/testSlice'
+import { updateOne } from 'redux/features/practiceSlice'
 import { TestField as ITestField } from 'types/storeTypes'
 
 const TestField = ({ english, russian, insertion }: ITestField) => {
@@ -12,11 +12,11 @@ const TestField = ({ english, russian, insertion }: ITestField) => {
 
 	return (
 		<div className='flex items-center mb-0.5'>
-			<div className='py-1 px-3 text-white text-xl bg-slate-600 rounded-md'>{english}</div>
+			<div className='py-1 px-4 text-white text-xl bg-slate-600 rounded-md'>{english}</div>
 			<p className='text-xl text-white font-bold mx-3'>-</p>
 
 			<div
-				className={`${width} min-h-[35px] max-w-[200px] line-clamp-1 py-1 px-3 text-white text-xl rounded-md ${bgColor} transition duration-200`}
+				className={`${width} py-1 px-4 min-h-[36px] max-w-[300px] text-left line-clamp-1 text-ellipsis text-white text-xl rounded-md ${bgColor} transition duration-200`}
 				onDragOver={(e) => {
 					e.preventDefault()
 					e.currentTarget.classList.add('scale-95')

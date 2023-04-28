@@ -23,7 +23,7 @@ wordsRouter.get('/:n', async (req, res) => {
 	}
 })
 
-wordsRouter.put('/new', (req, res) => {
+wordsRouter.put('/', (req, res) => {
 	const words = req.body
 	try {
 		Words.insertMany(words)
@@ -33,7 +33,7 @@ wordsRouter.put('/new', (req, res) => {
 	}
 })
 
-wordsRouter.post('/update/:id', async (req, res) => {
+wordsRouter.post('/:id', async (req, res) => {
 	const { id: _id } = req.params
 	const { english, russian } = req.body
 	try {
@@ -47,7 +47,7 @@ wordsRouter.post('/update/:id', async (req, res) => {
 	}
 })
 
-wordsRouter.delete('/delete/:id', async (req, res) => {
+wordsRouter.delete('/:id', async (req, res) => {
 	const { id: _id } = req.params
 	try {
 		await Words.deleteOne({ _id })

@@ -9,7 +9,7 @@ import { Word } from 'types/word'
 
 const api = import.meta.env.VITE_WORDS_API
 
-export function WordInput(word: Word) {
+export default function WordInput(word: Word) {
 	const dispatch = useAppDispatch()
 
 	const [visible, setVisible] = useState(false)
@@ -17,7 +17,7 @@ export function WordInput(word: Word) {
 	const [{ english, russian }, setWord] = useState(word)
 
 	const inputStyle =
-		'mx-4 bg-transparent text-2xl text-white whitespace-nowrap line-clamp-1 text-ellipsis focus:outline-none'
+		'w-96 mx-4 bg-transparent text-[25px] text-white line-clamp-1 text-ellipsis focus:outline-none'
 	const buttonContainerStyle = 'absolute right-3 w-12 flex items-center transition duration-200'
 	const buttonStyle = 'transition duration-200 hover:scale-110'
 	const hasChanged = english !== initialWord.english || russian !== initialWord.russian
@@ -62,7 +62,7 @@ export function WordInput(word: Word) {
 					className={buttonStyle}
 					onClick={() =>
 						axios
-							.post(`${api}/update/${word._id}`, { english, russian })
+							.post(`${api}/${word._id}`, { english, russian })
 							.then(() => setInitialWord((prev) => ({ ...prev, english, russian })))
 					}
 				/>

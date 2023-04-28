@@ -11,7 +11,7 @@ export interface TestField {
 	insertion: string | null
 }
 
-export interface TestInitialState {
+export interface PracticeInitialState {
 	testFields: TestField[]
 	unUsedWords: string[]
 	showResults: boolean

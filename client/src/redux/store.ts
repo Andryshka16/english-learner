@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import wordsReducer from './features/wordsSlice'
-import testReducer from './features/testSlice'
+import testReducer from './features/practiceSlice'
 
 const store = configureStore({
 	reducer: {
