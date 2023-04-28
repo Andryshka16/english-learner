@@ -17,7 +17,9 @@ export default function Practice() {
 	}, [words])
 
 	return loading ? (
-		<Loader />
+		<div className='mt-5'>
+			<Loader />
+		</div>
 	) : (
 		<div>
 			<div className='py-6 px-10 grid grid-cols-2 gap-4 w-2/3 min-w-fit m-auto my-5 text-justify'>
@@ -25,7 +27,7 @@ export default function Practice() {
 					<TestField {...word} key={`w${word.russian}`} />
 				))}
 			</div>
-			<hr className='w-3/4 m-auto h-0.5 border-none bg-slate-600'/>
+			<hr className='w-3/4 m-auto h-0.5 border-none bg-slate-600' />
 			<div className='w-2/3 m-auto py-6 text-justify'>
 				{unUsedWords.map((word) => (
 					<UnUsedWord word={word} />
