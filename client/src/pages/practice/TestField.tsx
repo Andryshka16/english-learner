@@ -1,14 +1,17 @@
 import { useAppDispatch, useAppSelector } from 'hooks/storeHooks'
+import { useRef } from 'react'
 import { updateOne } from 'redux/features/practiceSlice'
 import { TestField as ITestField } from 'types/storeTypes'
 
 const TestField = ({ english, russian, insertion }: ITestField) => {
 	const dispatch = useAppDispatch()
-	const { showResults } = useAppSelector((store) => store.test)
-	
+	const { dragging, showResults } = useAppSelector((store) => store.test)
+
 	const correctColor = 'bg-opacity-60 ' + (insertion === russian ? 'bg-green-500' : 'bg-red-500')
 	const width = insertion ? 'w-fit' : 'w-40'
 	const bgColor = showResults ? correctColor : 'bg-slate-600'
+
+	const ref = useRef<null | HTMLDivElement>(null)
 
 	return (
 		<div className='flex items-center mb-0.5'>
@@ -17,12 +20,16 @@ const TestField = ({ english, russian, insertion }: ITestField) => {
 
 			<div
 				className={`${width} py-1 px-4 min-h-[36px] max-w-[300px] text-left line-clamp-1 text-ellipsis text-white text-xl rounded-md ${bgColor} transition duration-200`}
+				ref={ref}
 				onDragOver={(e) => {
 					e.preventDefault()
 					e.currentTarget.classList.add('scale-95')
 				}}
 				onDragLeave={(e) => e.currentTarget.classList.remove('scale-95')}
 				onDrop={() => dispatch(updateOne(english))}
+				onMouseEnter={(e) => dragging && e.currentTarget.classList.add('scale-95')}
+				onMouseLeave={(e) => dragging && e.currentTarget.classList.remove('scale-95')}
+				onClick={() => dispatch(updateOne(english))}
 			>
 				{insertion}
 			</div>

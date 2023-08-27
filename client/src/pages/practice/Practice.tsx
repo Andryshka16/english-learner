@@ -30,16 +30,24 @@ export default function Practice() {
 			<hr className='w-3/4 m-auto h-0.5 border-none bg-slate-600' />
 			<div className='w-2/3 m-auto py-6 text-justify'>
 				{unUsedWords.map((word) => (
-					<UnUsedWord word={word} />
+					<UnUsedWord word={word} key={`s${word}`} />
 				))}
 
 				<div className='flex items-center w-fit m-auto'>
 					<button
-						className='mt-7 text-white font-semibold py-2 px-7 rounded-md transition duration-200 bg-blue-500 hover:bg-blue-600'
+						className='mt-7 mx-4 text-white font-semibold py-2 px-7 rounded-md transition duration-200 bg-blue-500 hover:bg-blue-600'
 						onClick={showResults}
 					>
 						Submit
 					</button>
+					{!unUsedWords.length && (
+						<button
+							className='mt-7 mx-4 text-white font-semibold py-2 px-7 rounded-md transition duration-200 bg-blue-500 hover:bg-blue-600'
+							onClick={() => dispatch(resetTest(words))}
+						>
+							Restart
+						</button>
+					)}
 				</div>
 			</div>
 		</div>
